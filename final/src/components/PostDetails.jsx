@@ -6,7 +6,7 @@ const PostDetails = () => {
     let params = useParams();
 
     const detailIndex = parseInt(params.symbol, 10);
-    const [post, setPost] = useState({id: null, title: "", content: ""});
+    const [post, setPost] = useState({id: null, title: "", content: "", upvote: 0});
     const [list, setList] = useState([]);
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
@@ -19,13 +19,20 @@ const PostDetails = () => {
         setContent(e.target.value);
     }
 
-    const updatePost = async (event) => { {/* need to implement update function */}
+    const likeCount = async (event) => {
+        event.preventDefault();
+        const { data, error } = await supabase.from("HobbyHub").update({upvote: (post.upvote + 1)}).eq("id", post.id); {/* FIX THIS, NEED UPVOTE COUNT FAST*/}
+        if (error)
+            console.error("Error fetching upvote count", error.message);
+        console.log("updated upvote count successfully", data);
+    }
+
+    const updatePost = async (event) => {
         event.preventDefault();
         setPost({id: detailIndex, title: title, content: content});
-        const { data, error} = await supabase.from("HobbyHub").update({title: post.title, content: post.content}).eq("id", post.id);
-        if (error) {
+        const { data, error } = await supabase.from("HobbyHub").update({title: post.title, content: post.content}).eq("id", post.id);
+        if (error)
             console.error("Error updating post:", error.message);
-        }
         console.log("Post updated successfully:", data);
     }
 
@@ -41,7 +48,7 @@ const PostDetails = () => {
             setList(data);
         }
         getData();
-    }, [updatePost, deletePost]);
+    }, [updatePost, deletePost, likeCount]);
  
     return (
         <div>
@@ -51,6 +58,8 @@ const PostDetails = () => {
                         <div className="gallery-post" key={i}>
                             <h3>{post.title}</h3>
                             <p>{post.content}</p>
+                            <p>{post.upvote} Upvotes</p>
+                            <button onClick={likeCount}>Like</button>
                         </div>
                     ) : <p>Empty List</p>
                 )

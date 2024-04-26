@@ -27,6 +27,7 @@ const HomePage = () => {
                         <div className="gallery-post" key={i}>
                             <h3>{post.title}</h3>
                             <p>{post.content}</p>
+                            <p>{post.upvote} Upvotes</p>
                         </div>
                     </Link>
                 ) : <p>Empty List</p>
