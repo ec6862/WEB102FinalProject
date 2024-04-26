@@ -40,7 +40,7 @@ const CreatePost = () => {
                     type="text"
                     placeholder="Content (Optional)"
                     onChange={handleContentChange}
-                /> <br/>
+                /> <br/> <br/>
                 <button onClick={createNewPost}>{loading ? "Loading..." : "Create Post"}</button>
                     {/* // onClick={async (e) => {
                     //     e.preventDefault();

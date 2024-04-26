@@ -87,3 +87,8 @@ button:focus-visible {
   border-color: black;
   padding: 5px;
 }
+
+.gallery-post {
+  border-color: aquamarine;
+  border-style: solid;
+}
