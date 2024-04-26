@@ -66,3 +66,24 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+.navbar {
+  list-style-type: none;
+  border-style: solid;
+  border-color:white;
+  /* border-radius: 20px; */
+  padding: 5px 0px;
+}
+
+.list {
+  display: inline;
+  /* border-style:groove;
+  border-color: red; */
+}
+
+.link {
+  color: White;
+  border-style: solid;
+  border-color: black;
+  padding: 5px;
+}
