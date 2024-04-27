@@ -10,6 +10,7 @@ const PostDetails = () => {
     const [list, setList] = useState([]);
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
+    const [upvote, setUpvote] = useState(0);
 
     const handleTitleChange = (e) => {
         setTitle(e.target.value);
@@ -20,14 +21,21 @@ const PostDetails = () => {
     }
 
     const likeCount = async (event) => {
-        event.preventDefault();
-        const { data, error } = await supabase.from("HobbyHub").update({upvote: (post.upvote + 1)}).eq("id", post.id); {/* FIX THIS, NEED UPVOTE COUNT FAST*/}
+        event.preventDefault(); {/* fetch variable problem*/}
+        setUpvote(upvote + 1);
+        const { data, error } = await supabase.from("HobbyHub").update({upvote: upvote}).eq("id", detailIndex).select("*"); {/* FIX THIS, NEED UPVOTE COUNT FAST*/}
+        // console.log("ID: ", post.id);
+        // console.log("upvote: ", post.upvote);
+        // console.log("upvote var: ", upvote);
         if (error)
             console.error("Error fetching upvote count", error.message);
-        console.log("updated upvote count successfully", data);
+        if (data != null)
+            console.log("updated upvote count successfully", data);
     }
 
     const updatePost = async (event) => {
+        if (title == "" || content == "")
+            return;
         event.preventDefault();
         setPost({id: detailIndex, title: title, content: content});
         const { data, error } = await supabase.from("HobbyHub").update({title: post.title, content: post.content}).eq("id", post.id);
@@ -46,7 +54,9 @@ const PostDetails = () => {
         const getData = async () => {
             const { data, error } = await supabase.from('HobbyHub').select().eq("id", detailIndex);
             setList(data);
-        }
+            if (error)
+                console.error("Error fetching post data:", error.message);
+            }
         getData();
     }, [updatePost, deletePost, likeCount]);
  
