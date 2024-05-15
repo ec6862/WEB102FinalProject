@@ -16,9 +16,12 @@ const CreatePost = () => {
     }
 
     const createNewPost = async (event) => {
-        setPostInfo({title: title, content: content});
         event.preventDefault();
-        const { data, error } = await supabase.from("HobbyHub").insert({title: postInfo.title, content: postInfo.content}).select();
+        // setPostInfo({title: title, content: content}); --> useless for some reason, does not update postInfo title or content
+        // console.log("postInfo title:", postInfo.title);
+        // console.log("postInfo content:", postInfo.content);
+
+        const { data, error } = await supabase.from("HobbyHub").insert({title: title, content: content}).select();
         if (error) {
             console.error("Error inserting new post:", error.message);
         } else {
@@ -26,10 +29,10 @@ const CreatePost = () => {
         }
         setLoading(false);
     }
-
+    
     return (
         <div>
-            <form>
+            <form onSubmit={createNewPost}>
                 <input
                     type="text"
                     value={title}
@@ -41,7 +44,7 @@ const CreatePost = () => {
                     placeholder="Content (Optional)"
                     onChange={handleContentChange}
                 /> <br/> <br/>
-                <button onClick={createNewPost}>{loading ? "Loading..." : "Create Post"}</button>
+                <button type = "submit">{loading ? "Loading..." : "Create Post"}</button>
                     {/* // onClick={async (e) => {
                     //     e.preventDefault();
                     //     setLoading(true);
