@@ -73,7 +73,7 @@ const HomePage = () => {
                             <h3>{post.title}</h3>
                             <p>{post.content}</p>
                             <p>{post.upvote} Upvotes</p>
-                            <p>Time Created: {post.created_at}</p>
+                            <p>Time Created: {new Date(post.created_at).toLocaleDateString("en-US")}</p>
                         </div>
                     </Link>
                 ) : null
