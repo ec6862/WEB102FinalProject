@@ -17,9 +17,9 @@ const CreatePost = () => {
 
     const createNewPost = async (event) => {
         event.preventDefault();
-        setPostInfo({title: title, content: content}); // --> useless for some reason, does not update postInfo title or content
-        console.log("postInfo title:", postInfo.title);
-        console.log("postInfo content:", postInfo.content);
+        // setPostInfo({title: title, content: content}); // --> useless for some reason, does not update postInfo title or content
+        // console.log("postInfo title:", postInfo.title);
+        // console.log("postInfo content:", postInfo.content);
 
         const { data, error } = await supabase.from("HobbyHub").insert({title: title, content: content}).select();
         if (error) {

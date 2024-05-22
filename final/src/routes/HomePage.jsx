@@ -26,7 +26,7 @@ const HomePage = () => {
         }
       }
 
-    const orderByDate = () => {
+    const orderByDate = (event) => {
         event.preventDefault();
         setOrderedByDate(!orderedByDate);
         const { data, error } = supabase.from('HobbyHub').select().order('created_at', {ascending: orderedByDate});
@@ -35,7 +35,7 @@ const HomePage = () => {
         }
     }
 
-    const orderByVote = () => {
+    const orderByVote = (event) => {
         event.preventDefault();
         setOrderedByVote(!orderedByVote);
         const { data, error } = supabase.from('HobbyHub').select().order('upvote', {ascending: orderedByVote});
