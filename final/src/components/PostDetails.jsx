@@ -11,6 +11,7 @@ const PostDetails = () => {
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
     const [upvote, setUpvote] = useState(0);
+    const [notification, setNotification] = useState("");
 
     const handleTitleChange = (e) => {
         setTitle(e.target.value);
@@ -40,14 +41,20 @@ const PostDetails = () => {
         event.preventDefault();
         setPost({id: detailIndex, title: title, content: content});
         const { data, error } = await supabase.from("HobbyHub").update({title: title, content: content}).eq("id", detailIndex);
+        if (error)
             console.error("Error updating post:", error.message);
-        console.log("Post updated successfully:", data);
+        else {
+            console.log("Post updated successfully:", data);
+            setNotification("Post updated successfully!");
+        }
     }
 
     const deletePost = async (event) => {
         event.preventDefault();
         await supabase.from("HobbyHub").delete().eq("id", detailIndex);
+
         console.log("Post deleted successfully");
+        setNotification("Post deleted successfully");
     }
 
     useEffect(() => {
@@ -89,6 +96,7 @@ const PostDetails = () => {
             </form> 
             <button onClick={updatePost}>Update Post</button>
             <button onClick={deletePost}>Delete Post</button>
+            {notification && <p>{notification}</p>}
         </div>
     )
 }
