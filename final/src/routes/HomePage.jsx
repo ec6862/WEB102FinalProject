@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { supabase } from '../client';
 import { Link, useParams } from 'react-router-dom';
 
+// Note
+// 5/24 --> workin on sortbyDate
+
 const HomePage = () => {
     let params = useParams();
     const [list, setList] = useState([]);
@@ -9,6 +12,7 @@ const HomePage = () => {
     const [filteredResults, setFilteredResults] = useState([]);
     const [orderedByDate, setOrderedByDate] = useState(false);
     const [orderedByVote, setOrderedByVote] = useState(false);
+    const [sortCol, setSortCol] = useState("");
 
 
     const searchItems = searchValue => {
@@ -26,12 +30,17 @@ const HomePage = () => {
         }
       }
 
-    const orderByDate = (event) => {
+    const orderByDate = async (event) => {
         event.preventDefault();
         setOrderedByDate(!orderedByDate);
-        const { data, error } = supabase.from('HobbyHub').select().order('created_at', {ascending: orderedByDate});
+        setSortCol("created_at");
+        const { data, error } = await supabase.from('HobbyHub').select().order(sortCol, {ascending: orderedByDate}); // works
         if (error) {
             console.error("Error ordering by date:", error.message);
+        }
+        else {
+            // console.log("OrderedByDate: ", orderedByDate);
+            // console.log("data", data);
         }
     }
 
@@ -48,6 +57,7 @@ const HomePage = () => {
         const getData = async () => {
             const { data, error } = await supabase.from('HobbyHub').select();
             setList(data);
+
         }
         getData();
     }, [orderByDate, orderByVote]);
