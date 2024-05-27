@@ -35,12 +35,15 @@ const HomePage = () => {
         setOrderedByDate(!orderedByDate);
         setSortCol("created_at");
         const { data, error } = await supabase.from('HobbyHub').select().order(sortCol, {ascending: orderedByDate}); // works
+        
+        // seeing if order functions or not
         if (error) {
             console.error("Error ordering by date:", error.message);
         }
         else {
             // console.log("OrderedByDate: ", orderedByDate);
-            // console.log("data", data);
+            console.log("data", data);
+            setList(data);
         }
     }
 
@@ -57,7 +60,6 @@ const HomePage = () => {
         const getData = async () => {
             const { data, error } = await supabase.from('HobbyHub').select();
             setList(data);
-
         }
         getData();
     }, [orderByDate, orderByVote]);
@@ -75,7 +77,6 @@ const HomePage = () => {
         <button onClick={orderByDate}>Order by Date</button>
         <button onClick={orderByVote}>Order by Vote</button>
         {
-            
             list.map((post, i) => 
                 post.title != "" ? (
                     <Link to={`/createPost/${post.id}`} key={i}>
