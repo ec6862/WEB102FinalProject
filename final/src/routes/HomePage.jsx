@@ -48,10 +48,10 @@ const HomePage = () => {
         }
     }
 
-    const orderByVote = (event) => {
+    const orderByVote = async (event) => {
         event.preventDefault();
         setOrderedByVote(!orderedByVote);
-        const { data, error } = supabase.from('HobbyHub').select().order('upvote', {ascending: orderedByVote});
+        const { data, error } = await supabase.from('HobbyHub').select().order('upvote', {ascending: orderedByVote});
         if (error) {
             console.error("Error ordering by vote:", error.message);
         }
