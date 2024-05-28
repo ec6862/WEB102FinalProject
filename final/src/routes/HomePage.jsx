@@ -12,7 +12,8 @@ const HomePage = () => {
     const [filteredResults, setFilteredResults] = useState([]);
     const [orderedByDate, setOrderedByDate] = useState(false);
     const [orderedByVote, setOrderedByVote] = useState(false);
-    const [sortCol, setSortCol] = useState("");
+    // const [sortCol, setSortCol] = useState("");
+    const [load, setLoad] = useState(false);
 
 
     const searchItems = searchValue => {
@@ -33,8 +34,8 @@ const HomePage = () => {
     const orderByDate = async (event) => {
         event.preventDefault();
         setOrderedByDate(!orderedByDate);
-        setSortCol("created_at");
-        const { data, error } = await supabase.from('HobbyHub').select().order(sortCol, {ascending: orderedByDate}); // works
+        // setSortCol("created_at"); --> ITS THIIS GUY AGAIN WHY U KEEP SENDING ME ERRORS
+        const { data, error } = await supabase.from('HobbyHub').select().order("created_at", {ascending: orderedByDate}); // works
         
         // seeing if order functions or not
         if (error) {
@@ -42,7 +43,7 @@ const HomePage = () => {
         }
         else {
             // console.log("OrderedByDate: ", orderedByDate);
-            console.log("data", data);
+            console.log("data from orderByDate", data);
             setList(data);
         }
     }
@@ -61,7 +62,10 @@ const HomePage = () => {
             const { data, error } = await supabase.from('HobbyHub').select();
             setList(data);
         }
-        getData();
+        if (load === false) {
+            setLoad(true);
+            getData();
+        }
     }, [orderByDate, orderByVote]);
 
     const detailIndex = parseInt(params.symbol, 10);
