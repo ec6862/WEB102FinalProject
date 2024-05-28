@@ -55,6 +55,10 @@ const HomePage = () => {
         if (error) {
             console.error("Error ordering by vote:", error.message);
         }
+        else {
+            console.log("data from orderByVote", data);
+            setList(data);
+        }
     }
 
     useEffect(() => {
