@@ -23,12 +23,10 @@ const PostDetails = () => {
 
     const likeCount = async (event) => {
         event.preventDefault(); {/* fetch variable problem*/}
-        console.log("list upvote",list.upvote)
-        console.log("upvote type", upvote.typeof);
-        const { data, error } = await supabase.from("HobbyHub").update({upvote: upvote}).eq("id", detailIndex).select("*"); {/* FIX THIS, NEED UPVOTE COUNT FAST*/}
-        // console.log("ID: ", post.id);
-        // console.log("upvote: ", post.upvote);
-        // console.log("upvote var: ", upvote);
+        // console.log("list upvote",list.upvote)
+        // console.log("upvote type", upvote.typeof);
+        // console.log("upvote count", list[0].upvote ); // because it is an array, we must use 0.  --> 0, Prototype: Array[0]
+        const { data, error } = await supabase.from("HobbyHub").update({upvote: list[0].upvote + 1}).eq("id", detailIndex).select("*"); {/* FIX THIS, NEED UPVOTE COUNT FAST*/}
         if (error)
             console.error("Error fetching upvote count", error.message);
         if (data != null)
