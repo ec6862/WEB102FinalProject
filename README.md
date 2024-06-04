@@ -2,9 +2,9 @@
 
 Submitted by: **Eric Chen**
 
-This web app: **insert description**
+This web app: **Working on search next, then create comment**
 
-Time spent: **5** hours spent in total
+Time spent: **6** hours spent in total
 
 ## Required Features
 
