@@ -8,8 +8,8 @@ import { Link, useParams } from 'react-router-dom';
 const HomePage = () => {
     let params = useParams();
     const [list, setList] = useState([]);
+    const [displayList, setDisplayList] = useState([]);
     const [searchInput, setSearchInput] = useState("");
-    const [filteredResults, setFilteredResults] = useState([]);
     const [orderedByDate, setOrderedByDate] = useState(false);
     const [orderedByVote, setOrderedByVote] = useState(false);
     // const [sortCol, setSortCol] = useState("");
@@ -18,21 +18,22 @@ const HomePage = () => {
 
     const searchItems = searchValue => {
         setSearchInput(searchValue);
-        // console.log("Search input: ", searchValue);
-        // console.log("List: ", list);
         if (searchValue !== "") {
-          const filteredData = Object.keys(list).filter((item) =>
-            Object.values(list[item])
-            .join("")
-            .toLowerCase()
-            .includes(searchValue.toLowerCase())
-          );
-          console.log("Filtered Data: ", filteredData);
-          setFilteredResults(filteredData);
-          console.log("", filteredResults)
-          setList(filteredResults);
+            // const filteredData = Object.keys(list).filter((item) =>
+            // Object.values(list[item])
+            // .join("")
+            // .toLowerCase()
+            // .includes(searchValue.toLowerCase())
+            // );
+            const filteredData = list.filter((item) =>
+                item.title.toLowerCase().includes(searchValue.toLowerCase())
+            );
+            console.log("Filtered Data: ", filteredData);
+            setDisplayList(filteredData);
+        //   console.log("List: ", list);
         } else {
-          setFilteredResults(Object.keys(list));
+            setDisplayList(list);
+            setLoad(false);
         }
       }
 
@@ -69,12 +70,12 @@ const HomePage = () => {
         const getData = async () => {
             const { data, error } = await supabase.from('HobbyHub').select();
             setList(data);
+            setDisplayList(data);
         }
-        // if (load === false) {
-        //     setLoad(true);
-        //     getData();
-        // }
-        getData();
+        if (load === false) { // need for orderByDate + orderByVote
+            setLoad(true);
+            getData();
+        }
     }, [orderByDate, orderByVote, searchItems]);
 
     const detailIndex = parseInt(params.symbol, 10);
@@ -82,15 +83,16 @@ const HomePage = () => {
     return (
     <div>
         <input
-        type="text"
-        placeholder="Search"
-          onChange={(inputString) => searchItems(inputString.target.value)}
+            type="text"
+            placeholder="Search posts..."
+            value={searchInput}
+            onChange={(inputString) => searchItems(inputString.target.value)}
         />
         <h2>Gallery</h2>
         <button onClick={orderByDate}>Order by Date</button>
         <button onClick={orderByVote}>Order by Vote</button>
         {
-            list.map((post, i) => 
+            displayList.map((post, i) => 
                 post.title != "" ? (
                     <Link to={`/createPost/${post.id}`} key={i}>
                         <div className="gallery-post" key={i}>
