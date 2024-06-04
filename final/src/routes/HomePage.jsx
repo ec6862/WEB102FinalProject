@@ -18,18 +18,19 @@ const HomePage = () => {
 
     const searchItems = searchValue => {
         setSearchInput(searchValue);
-        console.log("Search input: ", searchValue);
-        console.log("List: ", list);
+        // console.log("Search input: ", searchValue);
+        // console.log("List: ", list);
         if (searchValue !== "") {
-          const filteredData = Object.keys(list.Data).filter((item) =>
-            Object.values(item)
+          const filteredData = Object.keys(list).filter((item) =>
+            Object.values(list[item])
             .join("")
             .toLowerCase()
             .includes(searchValue.toLowerCase())
           );
+          console.log("Filtered Data: ", filteredData);
           setFilteredResults(filteredData);
         } else {
-          setFilteredResults(Object.keys(list.Data));
+          setFilteredResults(Object.keys(list));
         }
       }
 
@@ -39,7 +40,6 @@ const HomePage = () => {
         // setSortCol("created_at"); --> ITS THIIS GUY AGAIN WHY U KEEP SENDING ME ERRORS
         const { data, error } = await supabase.from('HobbyHub').select().order("created_at", {ascending: orderedByDate}); // works
         
-        // seeing if order functions or not
         if (error) {
             console.error("Error ordering by date:", error.message);
         }
