@@ -18,16 +18,18 @@ const HomePage = () => {
 
     const searchItems = searchValue => {
         setSearchInput(searchValue);
+        console.log("Search input: ", searchValue);
+        console.log("List: ", list);
         if (searchValue !== "") {
           const filteredData = Object.keys(list.Data).filter((item) =>
             Object.values(item)
             .join("")
             .toLowerCase()
             .includes(searchValue.toLowerCase())
-          )
-          setFilteredResults(filteredData)
+          );
+          setFilteredResults(filteredData);
         } else {
-          setFilteredResults(Object.keys(list.Data))
+          setFilteredResults(Object.keys(list.Data));
         }
       }
 
@@ -66,11 +68,12 @@ const HomePage = () => {
             const { data, error } = await supabase.from('HobbyHub').select();
             setList(data);
         }
-        if (load === false) {
-            setLoad(true);
-            getData();
-        }
-    }, [orderByDate, orderByVote]);
+        // if (load === false) {
+        //     setLoad(true);
+        //     getData();
+        // }
+        getData();
+    }, [orderByDate, orderByVote, searchItems]);
 
     const detailIndex = parseInt(params.symbol, 10);
 
