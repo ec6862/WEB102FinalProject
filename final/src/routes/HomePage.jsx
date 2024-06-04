@@ -24,13 +24,12 @@ const HomePage = () => {
             // .join("")
             // .toLowerCase()
             // .includes(searchValue.toLowerCase())
-            // );
-            const filteredData = list.filter((item) =>
-                item.title.toLowerCase().includes(searchValue.toLowerCase())
+            // ); --> doesn't work for this search input, research what Object.keys does
+            const filteredData = list.filter((item) => 
+                item.title.toLowerCase().includes(searchValue.toLowerCase()) // list filters, for each item, check item.title if it includes searchValue
             );
             console.log("Filtered Data: ", filteredData);
             setDisplayList(filteredData);
-        //   console.log("List: ", list);
         } else {
             setDisplayList(list);
             setLoad(false);
@@ -49,7 +48,7 @@ const HomePage = () => {
         else {
             // console.log("OrderedByDate: ", orderedByDate);
             console.log("data from orderByDate", data);
-            setList(data);
+            setDisplayList(data);
         }
     }
 
@@ -62,7 +61,7 @@ const HomePage = () => {
         }
         else {
             console.log("data from orderByVote", data);
-            setList(data);
+            setDisplayList(data);
         }
     }
 
