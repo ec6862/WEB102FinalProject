@@ -29,6 +29,8 @@ const HomePage = () => {
           );
           console.log("Filtered Data: ", filteredData);
           setFilteredResults(filteredData);
+          console.log("", filteredResults)
+          setList(filteredResults);
         } else {
           setFilteredResults(Object.keys(list));
         }
