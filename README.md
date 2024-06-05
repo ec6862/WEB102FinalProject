@@ -4,7 +4,7 @@ Submitted by: **Eric Chen**
 
 This web app: **Working on create comment**
 
-Time spent: **6** hours spent in total
+Time spent: **8** hours spent in total
 
 ## Required Features
 
