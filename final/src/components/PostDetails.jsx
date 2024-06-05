@@ -10,7 +10,7 @@ const PostDetails = () => {
     const [list, setList] = useState([]);
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
-    const [upvote, setUpvote] = useState(0);
+    const [comment, setComment] = useState("");
     const [notification, setNotification] = useState("");
 
     const handleTitleChange = (e) => {
@@ -55,6 +55,15 @@ const PostDetails = () => {
         setNotification("Post deleted successfully");
     }
 
+    const addComment = async (event) => {
+        event.preventDefault();
+        const { data, error } = await supabase.from("HobbyHub").update({comments: comment}.eq("id", detailIndex));
+        if (error)
+            console.log("Error with adding comment: ", error);
+        else
+            console.log("Successfully added comment");
+    }
+
     useEffect(() => {
         const getData = async () => {
             const { data, error } = await supabase.from('HobbyHub').select().eq("id", detailIndex);
@@ -80,6 +89,7 @@ const PostDetails = () => {
                     ) : <p>Empty List</p>
                 )
             } <br/>
+
             <form>
                 <input
                     type="text"
@@ -94,7 +104,15 @@ const PostDetails = () => {
             </form> 
             <button onClick={updatePost}>Update Post</button>
             <button onClick={deletePost}>Delete Post</button>
-            {notification && <p>{notification}</p>}
+            {notification && <p>{notification}</p>} <br/> <br/>
+
+            <input
+                type="text"
+                placeholder="Comment"
+                onChange={(e) => setComment(e.target.value)}
+            /> <br/>
+            <button onClick={addComment}>Comment</button> 
+
         </div>
     )
 }

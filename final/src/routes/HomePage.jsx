@@ -47,7 +47,7 @@ const HomePage = () => {
         }
         else {
             // console.log("OrderedByDate: ", orderedByDate);
-            console.log("data from orderByDate", data);
+            // console.log("data from orderByDate", data);
             setDisplayList(data);
         }
     }
@@ -60,7 +60,7 @@ const HomePage = () => {
             console.error("Error ordering by vote:", error.message);
         }
         else {
-            console.log("data from orderByVote", data);
+            // console.log("data from orderByVote", data);
             setDisplayList(data);
         }
     }
