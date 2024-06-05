@@ -57,7 +57,8 @@ const PostDetails = () => {
 
     const addComment = async (event) => {
         event.preventDefault();
-        const { data, error } = await supabase.from("HobbyHub").update({comments: comment}.eq("id", detailIndex));
+        console.log("comment", comment)
+        const { data, error } = await supabase.from("HobbyHub").update({comments: comment}).eq("id", detailIndex);
         if (error)
             console.log("Error with adding comment: ", error);
         else
@@ -73,7 +74,7 @@ const PostDetails = () => {
                 console.error("Error fetching post data:", error.message);
             }
         getData();
-    }, [updatePost, deletePost, likeCount]);
+    }, [updatePost, deletePost, likeCount, addComment]);
  
     return (
         <div>
