@@ -6,7 +6,6 @@ const PostDetails = () => {
     let params = useParams();
 
     const detailIndex = parseInt(params.symbol, 10);
-    const [post, setPost] = useState({id: null, title: "", content: "", upvote: 0});
     const [list, setList] = useState([]);
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
@@ -34,17 +33,22 @@ const PostDetails = () => {
     }
 
     const updatePost = async (event) => {
+        event.preventDefault();
         if (title == "" || content == "")
             return;
-        event.preventDefault();
-        setPost({id: detailIndex, title: title, content: content});
-        const { data, error } = await supabase.from("HobbyHub").update({title: title, content: content}).eq("id", detailIndex);
-        if (error)
-            console.error("Error updating post:", error.message);
-        else {
+
+        const { data, error } = await supabase
+        .from("HobbyHub")
+        .update({title: title, content: content})
+        .eq("id", detailIndex)
+        .select();
+
+        if (data) {
             console.log("Post updated successfully:", data);
             setNotification("Post updated successfully!");
         }
+        if (error)
+            console.error("Error updating post:", error.message);
     }
 
     const deletePost = async (event) => {
@@ -57,24 +61,35 @@ const PostDetails = () => {
 
     const addComment = async (event) => {
         event.preventDefault();
-        console.log("comment", comment)
-        const { data, error } = await supabase.from("HobbyHub").update({comments: comment}).eq("id", detailIndex);
-        if (error)
-            console.log("Error with adding comment: ", error);
-        else
+        const { data, error } = await supabase
+        .from("HobbyHub")
+        .update({comments: comment})
+        .eq("id", detailIndex);
+
+        if (data) {
             console.log("Successfully added comment");
+            setNotification("Comment added successfully!");
+        }
+        else if (error)
+            console.log("Error with adding comment: ", error);
     }
 
     useEffect(() => {
         const getData = async () => {
-            const { data, error } = await supabase.from('HobbyHub').select().eq("id", detailIndex);
+            const { data, error } = await supabase
+            .from('HobbyHub')
+            .select("*")
+            .eq("id", detailIndex);
+
             setList(data);
-            // console.log("data",data)
             if (error)
                 console.error("Error fetching post data:", error.message);
+            if (notification) {
+                console.log("notification: ", notification);
             }
+        }
         getData();
-    }, [updatePost, deletePost, likeCount, addComment]);
+    }, [updatePost, addComment]);
  
     return (
         <div>
@@ -105,14 +120,18 @@ const PostDetails = () => {
             </form> 
             <button onClick={updatePost}>Update Post</button>
             <button onClick={deletePost}>Delete Post</button>
-            {notification && <p>{notification}</p>} <br/> <br/>
+            {/* Because it is in JSX, it is rendering infinitely; if we put a function inside JSX, it will infinitely render, causing infinite popups.
+            {notification && <p>{sendNotification()}</p>} */}
+            <br/> <br/>
 
             <input
                 type="text"
                 placeholder="Comment"
                 onChange={(e) => setComment(e.target.value)}
             /> <br/>
-            <button onClick={addComment}>Comment</button> 
+            <button onClick={addComment}>Comment</button>
+
+            
 
         </div>
     )
