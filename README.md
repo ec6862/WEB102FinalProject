@@ -2,7 +2,7 @@
 
 Submitted by: **Eric Chen**
 
-This web app: **Working on create comment**
+This web app: **Skip comment section soon, start on CSS quick**
 
 Time spent: **8** hours spent in total
 
