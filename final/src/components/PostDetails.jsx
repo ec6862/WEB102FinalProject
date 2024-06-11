@@ -11,6 +11,7 @@ const PostDetails = () => {
     const [content, setContent] = useState("");
     const [comment, setComment] = useState("");
     const [notification, setNotification] = useState("");
+    const [refresh, setRefresh] = useState(false);
 
     const handleTitleChange = (e) => {
         setTitle(e.target.value);
@@ -66,12 +67,13 @@ const PostDetails = () => {
         .update({comments: comment})
         .eq("id", detailIndex);
 
-        if (data) {
+        if (error)
+                console.log("Error with adding comment: ", error);
+        else {
             console.log("Successfully added comment");
             setNotification("Comment added successfully!");
+            setRefresh(prev => !prev); // use a useState to help with rendering, otherwise it becomes infinite
         }
-        else if (error)
-            console.log("Error with adding comment: ", error);
     }
 
     useEffect(() => {
@@ -80,16 +82,14 @@ const PostDetails = () => {
             .from('HobbyHub')
             .select("*")
             .eq("id", detailIndex);
-
+    
             setList(data);
             if (error)
                 console.error("Error fetching post data:", error.message);
-            if (notification) {
-                console.log("notification: ", notification);
-            }
+            console.log("notification: ", notification);
         }
         getData();
-    }, [updatePost, addComment]);
+    }, [refresh]);
  
     return (
         <div>
