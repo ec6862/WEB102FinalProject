@@ -130,7 +130,15 @@ const PostDetails = () => {
                 onChange={(e) => setComment(e.target.value)}
             /> <br/>
             <button onClick={addComment}>Comment</button>
-
+            <br/> <br/> <hr/>
+            <div>
+                <h2>Comments</h2>
+                {list.map((post, i) =>
+                    post.comments != "" ? (
+                        <p className='comment' key={i}>{post.comments}</p>
+                    ) : <p>No comments yet</p>
+                )}
+            </div>
             
 
         </div>
