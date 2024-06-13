@@ -2,9 +2,9 @@
 
 Submitted by: **Eric Chen**
 
-This web app: **Skip comment section soon, start on CSS quick**
+This web app: **Completed functionalities, doing CSS and choose topic to focus on**
 
-Time spent: **8** hours spent in total
+Time spent: **10** hours spent in total
 
 ## Required Features
 
