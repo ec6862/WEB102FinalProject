@@ -77,8 +77,6 @@ button:focus-visible {
 
 .list {
   display: inline;
-  /* border-style:groove;
-  border-color: red; */
 }
 
 .link {
@@ -91,4 +89,5 @@ button:focus-visible {
 .gallery-post {
   border-color: aquamarine;
   border-style: solid;
+  border-radius: 0%;
 }
