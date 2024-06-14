@@ -2,9 +2,9 @@
 
 Submitted by: **Eric Chen**
 
-This web app: **Skip comment section soon, start on CSS quick**
+This web app: **Completed functionalities, doing CSS and choose topic to focus on**
 
-Time spent: **8** hours spent in total
+Time spent: **10** hours spent in total
 
 ## Required Features
 
@@ -18,7 +18,7 @@ The following **required** functionality is completed:
 - [x] **Users can sort posts by either their created time or upvotes count**
 - [x] **Users can search for posts by title**
 - [x] **A separate post page for each created post, where any additional information is shown is linked whenever a user clicks a post**
-- [ ] **Users can leave comments underneath a post on the post's separate page**
+- [x] **Users can leave comments underneath a post on the post's separate page**
 - [x] **Each post should have an upvote button on the post's page. Each click increases its upvotes count by one and users can upvote any number of times**
 - [x] **A previously created post can be edited or deleted from its post page**
 
