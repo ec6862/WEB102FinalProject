@@ -94,7 +94,7 @@ const HomePage = () => {
             displayList.map((post, i) => 
                 post.title != "" ? (
                     <Link to={`/createPost/${post.id}`} key={i}>
-                        <div className="p-6 border-2 border-sky-500" key={i}>
+                        <div className="p-6 border-2 border-sky-500 rounded-lg" key={i}>
                             <h3>{post.title}</h3>
                             <p>{post.content}</p>
                             <p>{post.upvote} Upvotes</p>
