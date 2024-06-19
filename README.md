@@ -2,7 +2,7 @@
 
 Submitted by: **Eric Chen**
 
-This web app: **Completed functionalities, doing CSS and choose topic to focus on**
+This web app: **Completed functionalities, applying CSS. Focus: replicating reddit's style for posts**
 
 Time spent: **10** hours spent in total
 
