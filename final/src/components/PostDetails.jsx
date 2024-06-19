@@ -47,6 +47,7 @@ const PostDetails = () => {
         if (data) {
             console.log("Post updated successfully:", data);
             setNotification("Post updated successfully!");
+            setRefresh(prev => !prev);
         }
         if (error)
             console.error("Error updating post:", error.message);
@@ -58,6 +59,7 @@ const PostDetails = () => {
 
         console.log("Post deleted successfully");
         setNotification("Post deleted successfully");
+        setRefresh(prev => !prev);
     }
 
     const addComment = async (event) => {
@@ -96,7 +98,7 @@ const PostDetails = () => {
             {
                 list.map((post, i) => 
                     post.title != "" ? (
-                        <div className="gallery-post" key={i}>
+                        <div className="p-5 border-2 border-sky-500 " key={i}>
                             <h3>{post.title}</h3>
                             <p>{post.content}</p>
                             <p>{post.upvote} Upvotes</p>

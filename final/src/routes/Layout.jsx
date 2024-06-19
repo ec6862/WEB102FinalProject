@@ -7,7 +7,7 @@ const Layout = () => {
         <div>
             {/* Navbar */}
             <nav>
-                <ul className='p-5 border-2 border-sky-500 bg-'>
+                <ul className='p-5 border-2 border-sky-500 bg-black'>
                     <li className='list' key='home-button'>
                         <Link className="link" to="/">
                             Home
