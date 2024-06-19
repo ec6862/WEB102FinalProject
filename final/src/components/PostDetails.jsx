@@ -88,10 +88,9 @@ const PostDetails = () => {
             setList(data);
             if (error)
                 console.error("Error fetching post data:", error.message);
-            console.log("notification: ", notification);
         }
         getData();
-    }, [refresh]);
+    }, [refresh, likeCount]);
  
     return (
         <div>
