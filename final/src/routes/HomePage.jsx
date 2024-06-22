@@ -95,7 +95,7 @@ const HomePage = () => {
                 post.title != "" ? (
                     <Link to={`/createPost/${post.id}`} key={i}>
                         <div className="p-6 border-2 border-sky-500 rounded-lg" key={i}>
-                            <h3>{post.title}</h3>
+                            <h1>{post.title}</h1>
                             <p>{post.content}</p>
                             <p>{post.upvote} Upvotes</p>
                             <p>Time Created: {new Date(post.created_at).toLocaleDateString("en-US")}</p>
