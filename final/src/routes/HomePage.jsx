@@ -94,12 +94,12 @@ const HomePage = () => {
             displayList.map((post, i) => 
                 post.title != "" ? (
                     <Link to={`/createPost/${post.id}`} key={i}>
-                        <div className="p-6 border-2 border-sky-500 rounded-lg" key={i}>
+                        <article className="p-6 border-2 border-sky-500 rounded-lg" key={i}>
                             <h1>{post.title}</h1>
-                            <p>{post.content}</p>
+                            <p className='line-clamp-3'>{post.content}</p> {/* line-clamp-3 truncates the text to 3 lines, gives the ... */}
                             <p>{post.upvote} Upvotes</p>
                             <p>Time Created: {new Date(post.created_at).toLocaleDateString("en-US")}</p>
-                        </div>
+                        </article>
                     </Link>
                 ) : null
             )
