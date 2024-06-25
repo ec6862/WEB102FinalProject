@@ -2,7 +2,7 @@
 
 Submitted by: **Eric Chen**
 
-This web app: **The focus: replicating reddit's style for posts**
+This web app: **The focus: replicating reddit's style for posts, using TailwindCSS**
 
 Time spent: **12** hours spent in total
 
