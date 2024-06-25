@@ -101,7 +101,7 @@ const PostDetails = () => {
                             <h3>{post.title}</h3>
                             <p>{post.content}</p>
                             <p>{post.upvote} Upvotes</p>
-                            <button onClick={likeCount}>Like</button>
+                            <button className="bg-sky-500 hover:bg-sky-600 hover:border-sky-600 " onClick={likeCount}>Like</button>
                         </div>
                     ) : <p>Empty List</p>
                 )
