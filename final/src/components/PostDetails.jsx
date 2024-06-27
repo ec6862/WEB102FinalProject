@@ -93,12 +93,12 @@ const PostDetails = () => {
     }, [refresh, likeCount]);
  
     return (
-        <div>
+        <div className='font-mono'>
             {
                 list.map((post, i) => 
                     post.title != "" ? (
-                        <div className="p-5 border-2 border-sky-500 " key={i}>
-                            <h3>{post.title}</h3>
+                        <div className="p-5 border-2 border-stone-700 shadow-xl shadow-sky-500 text-left" key={i}>
+                            <h2 className=''>{post.title}</h2>
                             <p>{post.content}</p>
                             <p>{post.upvote} Upvotes</p>
                             <button className="bg-sky-500 hover:bg-sky-600 hover:border-sky-600 " onClick={likeCount}>Like</button>
