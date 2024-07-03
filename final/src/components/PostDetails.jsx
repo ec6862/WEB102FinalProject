@@ -8,6 +8,7 @@ const PostDetails = () => {
     const detailIndex = parseInt(params.symbol, 10);
     const [list, setList] = useState([]);
     const [title, setTitle] = useState("");
+    const [titleChange, setTitleChange] = useState(false);
     const [content, setContent] = useState("");
     const [comment, setComment] = useState("");
     const [notification, setNotification] = useState("");
@@ -15,6 +16,11 @@ const PostDetails = () => {
 
     const handleTitleChange = (e) => {
         setTitle(e.target.value);
+        if (e.target.value == "") {
+            setTitleChange(true);
+        } else {
+            setTitleChange(false);
+        }
     }
 
     const handleContentChange = (e) => {
@@ -93,7 +99,7 @@ const PostDetails = () => {
     }, [refresh, likeCount]);
  
     return (
-        <div className='font-mono'>
+        <div>
             {
                 list.map((post, i) => 
                     post.title != "" ? (
@@ -108,11 +114,14 @@ const PostDetails = () => {
             } <br/>
 
             <form>
-                <input
-                    type="text"
-                    placeholder="New Title"
-                    onChange={handleTitleChange}
-                /> <br/>
+                <div className= {titleChange ? "border-2 border-rose-500 rounded-xl flex" : "rounded-xl border-2 border-gray-50 hover:border-gray-300 flex"}>
+                    <input
+                        type="text"
+                        placeholder="New Title"
+                        onChange={handleTitleChange}
+                        className='flex'
+                    /> <br/>
+                </div>
                 <input
                     type="text"
                     placeholder="New Content (Optional)"

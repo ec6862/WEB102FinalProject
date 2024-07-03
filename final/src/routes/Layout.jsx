@@ -7,14 +7,14 @@ const Layout = () => {
         <div>
             {/* Navbar */}
             <nav>
-                <ul className='p-5 border-2 border-sky-500'>
+                <ul className='p-5 border-2 border-sky-500 space-x-1'>
                     <li className='list' key='home-button'>
                         <Link className="p-3 rounded-xl bg-sky-500 text-inherit hover:text-inherit hover:bg-sky-600 " to="/">
                             Home
                         </Link>
                     </li>
                     <li className='list' key='create-post-button'>
-                        <Link className='p-3 rounded-xl bg-sky-500 text-inherit' to ="/createPost">
+                        <Link className='p-3 rounded-xl bg-sky-500 text-inherit hover:text-inherit hover:bg-sky-600' to ="/createPost">
                             Create New Post
                         </Link>
                     </li>
