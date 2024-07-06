@@ -99,12 +99,12 @@ const PostDetails = () => {
     }, [refresh, likeCount]);
  
     return (
-        <div>
+        <div className="">
             {
                 list.map((post, i) => 
                     post.title != "" ? (
                         <div className="p-5 border-2 border-stone-700 shadow-xl shadow-sky-500 text-left" key={i}>
-                            <h2 className=''>{post.title}</h2>
+                            <h2 className='text-lg md:text-lg'>{post.title}</h2>
                             <p>{post.content}</p>
                             <p>{post.upvote} Upvotes</p>
                             <button className="bg-sky-500 hover:bg-sky-600 hover:border-sky-600 " onClick={likeCount}>Like</button>
@@ -119,7 +119,7 @@ const PostDetails = () => {
                         type="text"
                         placeholder="New Title"
                         onChange={handleTitleChange}
-                        className='flex'
+                        className='flex rounded-xl'
                     /> <br/>
                 </div>
                 <input
