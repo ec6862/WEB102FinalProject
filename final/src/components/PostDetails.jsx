@@ -41,24 +41,36 @@ const PostDetails = () => {
 
     const updatePost = async (event) => {
         event.preventDefault();
-        if (title == "" || content == "") {
-            console.log("One input is missing");
+        if (title == "" && content == "") {
+            console.log("Please put in an input.");
             return;
+        } else if (content == "") { // need to make an option where if we only have one input, we do not update the other input and instead keep it
+            const { data, error } = await supabase
+            .from("HobbyHub")
+            .update({title: title})
+            .eq("id", detailIndex)
+            .select();
+        } else if (title == "") {
+            const { data, error } = await supabase
+            .from("HobbyHub")
+            .update({content: content})
+            .eq("id", detailIndex)
+            .select();
+        } else {
+            const { data, error } = await supabase
+            .from("HobbyHub")
+            .update({title: title, content: content})
+            .eq("id", detailIndex)
+            .select();
+    
+            if (data) {
+                console.log("Post updated successfully:", data);
+                setNotification("Post updated successfully!");
+                setRefresh(prev => !prev);
+            }
+            if (error)
+                console.error("Error updating post:", error.message);
         }
-
-        const { data, error } = await supabase
-        .from("HobbyHub")
-        .update({title: title, content: content})
-        .eq("id", detailIndex)
-        .select();
-
-        if (data) {
-            console.log("Post updated successfully:", data);
-            setNotification("Post updated successfully!");
-            setRefresh(prev => !prev);
-        }
-        if (error)
-            console.error("Error updating post:", error.message);
     }
 
     const deletePost = async (event) => {
