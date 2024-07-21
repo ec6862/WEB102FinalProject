@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 const PostDetails = () => {
     let params = useParams();
 
-    const detailIndex = parseInt(params.symbol, 10);
+    const detailIndex = parseInt(params.symbol, 10); // Why do we need to use params.symbol?
     const [list, setList] = useState([]);
     const [title, setTitle] = useState("");
     const [titleChange, setTitleChange] = useState(false);
@@ -41,8 +41,10 @@ const PostDetails = () => {
 
     const updatePost = async (event) => {
         event.preventDefault();
-        if (title == "" || content == "")
+        if (title == "" || content == "") {
+            console.log("One input is missing");
             return;
+        }
 
         const { data, error } = await supabase
         .from("HobbyHub")
@@ -99,13 +101,13 @@ const PostDetails = () => {
     }, [refresh, likeCount]);
  
     return (
-        <div className="">
+        <div>
             {
                 list.map((post, i) => 
                     post.title != "" ? (
                         <div className="p-5 border-2 border-stone-700 shadow-xl shadow-sky-500 text-left" key={i}>
-                            <h2 className='text-lg md:text-lg'>{post.title}</h2>
-                            <p>{post.content}</p>
+                            <p className='text-xl md:text-lg'>{post.title}</p> <br/>
+                            <p>{post.content}</p> <br/>
                             <p>{post.upvote} Upvotes</p>
                             <button className="bg-sky-500 hover:bg-sky-600 hover:border-sky-600 " onClick={likeCount}>Like</button>
                         </div>
@@ -115,17 +117,18 @@ const PostDetails = () => {
 
             <form>
                 <div className= {titleChange ? "border-2 border-rose-500 rounded-xl flex" : "rounded-xl border-2 border-gray-50 hover:border-gray-300 flex"}>
-                    <input
+                    <textarea
                         type="text"
                         placeholder="New Title"
                         onChange={handleTitleChange}
-                        className='flex rounded-xl'
+                        className='flex rounded-xl overflow-hidden w-full'
                     /> <br/>
                 </div>
                 <input
                     type="text"
                     placeholder="New Content (Optional)"
                     onChange={handleContentChange}
+                    className='w-full'
                 /> <br/> <br/>
             </form> 
             <button onClick={updatePost}>Update Post</button>
@@ -149,8 +152,6 @@ const PostDetails = () => {
                     ) : <p>No comments yet</p>
                 )}
             </div>
-            
-
         </div>
     )
 }

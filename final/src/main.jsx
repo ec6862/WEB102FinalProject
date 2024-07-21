@@ -11,13 +11,13 @@ import PostDetails from './components/PostDetails.jsx'
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
-    <Routes>
-      <Route path = "/" element={<Layout/>}>
-        <Route index ={true} element={<HomePage/>}/> {/* Remember to put element = "home page" */}
-        <Route path = "/createPost" element={<CreatePost/>}/>
-        <Route path = "/createPost/:symbol" element={<PostDetails/>}/>
-      </Route>
-    </Routes>
+      <Routes>
+        <Route path = "/" element={<Layout/>}>
+          <Route index ={true} element={<HomePage/>}/> {/* Remember to put element = "home page" */}
+          <Route path = "/createPost" element={<CreatePost/>}/>
+          <Route path = "/createPost/:symbol" element={<PostDetails/>}/>
+        </Route>
+      </Routes>
     </BrowserRouter>
   </React.StrictMode>,
 )
