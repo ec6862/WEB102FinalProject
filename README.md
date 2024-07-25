@@ -2,9 +2,13 @@
 
 Submitted by: **Eric Chen**
 
-This web app: **The focus: replicating reddit's style for posts, using TailwindCSS**
+This web app: **The focus: replicating reddit's style for posts, using TailwindCSS.**
+Goals:
+1. Allow users to make accounts
+2. Set up so users can leave more than one comment
+3. Organize the posts
 
-Time spent: **12** hours spent in total
+Time spent: **10+** hours spent in total
 
 ## Required Features
 
