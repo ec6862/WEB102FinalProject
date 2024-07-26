@@ -128,17 +128,17 @@ const PostDetails = () => {
             } <br/>
 
             <form>
-                <div className= {titleChange ? "border-2 border-rose-500 rounded-xl flex" : "rounded-xl border-2 border-gray-50 hover:border-gray-300 flex"}>
+                <div className= {titleChange ? "border-2 border-rose-500 rounded-xl flex" : "rounded-xl border-2 border-gray-50 hover:border-gray-300 flex"}> {/*Update Title portion: the conditional rendering here is whether the user clicked or didnt click on the title portion, imitating the red "missing" warning. */}
                     <textarea
                         type="text"
-                        placeholder="New Title"
+                        placeholder="Update Title"
                         onChange={handleTitleChange}
                         className='flex rounded-xl overflow-hidden w-full'
                     /> <br/>
                 </div>
                 <input
                     type="text"
-                    placeholder="New Content (Optional)"
+                    placeholder="Update Content (Optional)"
                     onChange={handleContentChange}
                     className='w-full'
                 /> <br/> <br/>
@@ -159,9 +159,9 @@ const PostDetails = () => {
             <div>
                 <h2>Comments</h2>
                 {list.map((post, i) =>
-                    post.comments != "" ? (
+                    post.comments != null ? (
                         <p className='comment' key={i}>{post.comments}</p>
-                    ) : <p>No comments yet</p>
+                    ) : (<p>No comments yet</p>)
                 )}
             </div>
         </div>
