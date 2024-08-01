@@ -8,6 +8,9 @@ import CreatePost from './routes/CreatePost.jsx'
 import HomePage from './routes/HomePage.jsx'
 import PostDetails from './components/PostDetails.jsx'
 
+// Next Steps: Update the warning in PostDetails
+// Allow users to create an account for themselves
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>

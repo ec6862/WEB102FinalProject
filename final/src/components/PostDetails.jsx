@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { supabase } from '../client';
 import { useParams } from 'react-router-dom';
+import { Textarea } from '@headlessui/react'
 
 const PostDetails = () => {
     let params = useParams();
@@ -129,14 +130,14 @@ const PostDetails = () => {
 
             <form>
                 <div className= {titleChange ? "border-2 border-rose-500 rounded-xl flex" : "rounded-xl border-2 border-gray-50 hover:border-gray-300 flex"}> {/*Update Title portion: the conditional rendering here is whether the user clicked or didnt click on the title portion, imitating the red "missing" warning. */}
-                    <textarea
+                    <Textarea
                         type="text"
                         placeholder="Update Title"
                         onChange={handleTitleChange}
                         className='flex rounded-xl overflow-hidden w-full'
                     /> <br/>
                 </div>
-                <input
+                <Textarea
                     type="text"
                     placeholder="Update Content (Optional)"
                     onChange={handleContentChange}
